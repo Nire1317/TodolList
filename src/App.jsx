@@ -102,7 +102,7 @@ const App = () => {
                         {data.map((item) => (
                             <tr key={item.id}>
                                 <td>
-                                    <input type="checkbox" />
+                                Completed<input type="checkbox" />
                                 </td>
                                 <td>{item.title}</td>
                                 <td style ={{display:"flex",gap:10}}>
