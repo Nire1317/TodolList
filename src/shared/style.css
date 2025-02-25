@@ -42,20 +42,19 @@ body {
     transition: background-color 0.3s ease;
     margin-left: 10px;
 }
-.body-container{
+.body-container {
     margin-top: 20px;
     position: absolute;
-    top:auto;
+    top: auto;
     left: 10%;
     background-color: #2a3a6d;
     width: 60%;
-    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     border-radius: 8px;
 }
-.display-container{
+.display-container {
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #007BFF;
@@ -74,57 +73,92 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     font-family: Arial, sans-serif;
-  }
+}
   
- 
-  th {
+th {
     background-color: #007BFF;
     color: white;
     padding: 10px;
     text-align: left;
-  }
+}
   
-
-  td {
+td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
-  }
+}
   
-
-  tbody tr:nth-child(even) {
-    background-color: transparent transparent;
-  }
+tbody tr:nth-child(even) {
+    background-color: transparent;
+}
   
-  input[type="checkbox"] {
+input[type="checkbox"] {
     width: 16px;
     height: 16px;
     cursor: pointer;
-  }
+}
   
-  
-  button {
+button {
     padding: 6px 12px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-  }
+}
   
-  
-  button.edit {
+button.edit {
     background-color: #28a745;
     color: white;
     margin-right: 5px;
-  }
+}
   
- 
-  button.delete {
+button.delete {
     background-color: #dc3545;
     color: white;
-  }
+}
   
-
-  button:hover {
+button:hover {
     opacity: 0.8;
-  }
-  
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+    .input-bar {
+        width: 70%;
+    }
+    .add-btn {
+        padding: 8px 16px;
+        margin-left: 5px;
+    }
+    .body-container {
+        width: 80%;
+        left: 10%;
+    }
+    .display-container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+    .input-bar {
+        width: 60%;
+    }
+    .add-btn {
+        padding: 6px 12px;
+        margin-left: 5px;
+    }
+    .body-container {
+        width: 90%;
+        left: 5%;
+    }
+    .display-container {
+        width: 90%;
+    }
+}
