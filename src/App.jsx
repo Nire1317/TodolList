@@ -105,7 +105,7 @@ const App = () => {
                                     <input type="checkbox" />
                                 </td>
                                 <td>{item.title}</td>
-                                <td>
+                                <td style ={{display:"flex",gap:10}}>
                                     <button onClick={() => handleEdit(item.id)}>Edit</button>
                                     <button onClick={() => deleteTask(item.id)} style={{ marginLeft: "5px" }}>
                                         Delete
