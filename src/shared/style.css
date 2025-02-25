@@ -1,0 +1,130 @@
+body {
+    background-color: #293239;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;   
+}
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #a9c0da;
+}
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.input-bar {
+    background-color: transparent;
+    padding: 10px;
+    border-bottom: 1px solid #007BFF;
+    transition: background-color 0.3s ease;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border-color: #F7F7F7;
+    outline: transparent;
+}
+.add-btn {
+    background-color: #007BFF;
+    color: #F7F7F7;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+.body-container{
+    margin-top: 20px;
+    position: absolute;
+    top:auto;
+    left: 10%;
+    background-color: #2a3a6d;
+    width: 60%;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 8px;
+}
+.display-container{
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #007BFF;
+    border-radius: 8px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #556481;
+    transition: background-color 0.3s ease;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+ 
+  th {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    text-align: left;
+  }
+  
+
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+
+  tbody tr:nth-child(even) {
+    background-color: transparent transparent;
+  }
+  
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  
+  button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  
+  button.edit {
+    background-color: #28a745;
+    color: white;
+    margin-right: 5px;
+  }
+  
+ 
+  button.delete {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+
+  button:hover {
+    opacity: 0.8;
+  }
+  
