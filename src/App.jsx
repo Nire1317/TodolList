@@ -35,7 +35,7 @@ const newTask = () => {
           </div>
 
         <div >
-              <h2>My Todo List</h2>
+              <h2>My Todo List V1</h2>
                 <table border="1" style={{ width: "100%", textAlign: "left" }}>
                 <thead>
                   <tr>
