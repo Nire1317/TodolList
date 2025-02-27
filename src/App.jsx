@@ -1,60 +1,87 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import './shared/style.css';
+
+const API_URL = "https://jsonplaceholder.typicode.com/todos"; // ✅ Base URL for API
 
 const App = () => {
     const [value, setValue] = useState("");
     const [editValue, setEditValue] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const [editId, setEditId] = useState(null);
-    const [data, setData] = useState([
-        { id: 1, task: 1, title: 'Fix the Error in the capstone' },
-        { id: 2, task: 2, title: 'Finish the activity 6' },
-        { id: 3, task: 3, title: 'Review the chapter 5/6 for quiz tomorrow' },
-        { id: 4, task: 4, title: 'Create a simple test' },
-        { id: 5, task: 5, title: 'Review the chapter 5/6 for quiz tomorrow' },
-        { id: 6, task: 6, title: 'Review the chapter 5/6 for quiz tomorrow' },
-        { id: 7, task: 7, title: 'Review the chapter 5/6 for quiz tomorrow' },
-        { id: 8, task: 8, title: 'Review the chapter 5/6 for quiz tomorrow' },
-       
-    ]);
+    const [data, setData] = useState([]);
 
-    const newTask = () => {
-        const newUser = {
-            id: data.length + 1,
-            task: data.length + 1,
-            title: value
+    // ✅ Fetch data when component mounts
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(API_URL);  // ✅ Axios GET request
+                const formattedData = response.data.map(user => ({
+                    id: user.id,
+                    title: user.title  // ✅ Use 'name' as 'title'
+                }));
+                setData(formattedData);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
         };
+        fetchData();
+    }, []);
 
-        setData([newUser, ...data]); // Correct way to update state in React
-        setValue(""); // Clear the input field
+    // ✅ Add a new task
+    const newTask = async () => {
+        if (!value.trim()) return; // Prevent empty input
+
+        const newUser = { id: data.length + 1, title: value };
+
+        try {
+            await axios.post(API_URL, newUser); // ✅ Simulate API call
+            setData([newUser, ...data]); // ✅ Update state locally
+            setValue(""); 
+        } catch (error) {
+            console.error("Error adding task:", error);
+        }
     };
 
-    const deleteTask = (id) => {
-        const updatedTasks = data.filter(item => item.id !== id); // Remove item
-        setData(updatedTasks); // ✅ Correctly update state
-        console.log(`The task with ID ${id} has been deleted`);
+    // ✅ Delete a task
+    const deleteTask = async (id, title) => {
+        try {
+            await axios.delete(`${API_URL}/${id}`); // ✅ DELETE request
+            setData(data.filter(item => item.id !== id)); // ✅ Update UI
+            window.alert(`The task is deleted with a title of ${title},Deleted task with ID: ${id}`);
+
+        } catch (error) {
+            console.error("Error deleting task:", error);
+        }
     };
 
+    // ✅ Handle edit
     const handleEdit = (id) => {
         const taskToEdit = data.find(item => item.id === id);
+        if (!taskToEdit) return;
         setEditValue(taskToEdit.title);
         setIsEditing(true);
         setEditId(id);
     };
 
-    const saveEdit = () => {
-        const updatedTasks = data.map(item => {
-            if (item.id === editId) {
-                return { ...item, title: editValue };
-            }
-            return item;
-        });
-        setData(updatedTasks);
-        setIsEditing(false);
-        setEditId(null);
-        setEditValue("");
+    // ✅ Save edited task
+    const saveEdit = async () => {
+        if (!editValue.trim()) return; 
+
+        const updatedTask = { id: editId, title: editValue };
+
+        try {
+            await axios.put(`${API_URL}/${editId}`, updatedTask); // ✅ PUT request
+            setData(data.map(item => item.id === editId ? { ...item, title: editValue } : item));
+            setIsEditing(false);
+            setEditId(null);
+            setEditValue("");
+        } catch (error) {
+            console.error("Error updating task:", error);
+        }
     };
 
+    // ✅ Cancel editing
     const cancelEdit = () => {
         setIsEditing(false);
         setEditId(null);
@@ -71,7 +98,7 @@ const App = () => {
                     placeholder="Add new task here"
                     className="input-bar"
                 />
-                <button onClick={newTask} className="add-btn">Add task</button>
+                <button onClick={newTask} className="add-btn">Add Task</button>
             </div>
 
             {isEditing && (
@@ -82,6 +109,7 @@ const App = () => {
                         value={editValue}
                         placeholder="Edit task title"
                         className="input-bar"
+                        required
                     />
                     <button onClick={saveEdit} className="add-btn">Save</button>
                     <button onClick={cancelEdit} className="add-btn">Cancel</button>
@@ -101,15 +129,11 @@ const App = () => {
                     <tbody>
                         {data.map((item) => (
                             <tr key={item.id}>
-                                <td>
-                                Completed<input type="checkbox" />
-                                </td>
-                                <td>{item.title}</td>
-                                <td style ={{display:"flex",gap:10}}>
+                                <td><input type="checkbox" /></td>
+                                <td>{item.title}</td>  {/* ✅ Correctly displaying title */}
+                                <td style={{ display: "flex", gap: 10 }}>
                                     <button onClick={() => handleEdit(item.id)}>Edit</button>
-                                    <button onClick={() => deleteTask(item.id)} style={{ marginLeft: "5px" }}>
-                                        Delete
-                                    </button>
+                                    <button onClick={() => deleteTask(item.id)}>Delete</button>
                                 </td>
                             </tr>
                         ))}
@@ -121,5 +145,3 @@ const App = () => {
 };
 
 export default App;
-
-
